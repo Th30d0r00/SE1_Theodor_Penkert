@@ -4,7 +4,6 @@ import org.hbrs.se1.ws23.uebung1.view.Client;
 
 public class Factory {
     public static Translator create() {
-        Translator translator = new GermanTranslator();
-        return translator;
+        return new GermanTranslator();
     }
 }

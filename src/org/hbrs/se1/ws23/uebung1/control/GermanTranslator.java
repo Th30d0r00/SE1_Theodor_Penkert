@@ -8,9 +8,12 @@ public class GermanTranslator implements Translator {
 	 * Methode zur Übersetzung einer Zahl in eine String-Repraesentation
 	 */
 	public String translateNumber( int number ) {
-		// [ihr Source Code aus Übung 1-2]
-
-		return "null";
+		if (number <= 10 && number >= 1) {
+			String [] zahlen = {"null","eins", "zwei", "drei", "vier", "fünf","sechs","sieben","acht","neun","zehn"};
+			return zahlen[number];
+		} else {
+			return "Übersetzung der Zahl " + number + " nicht möglich, " + "Versionsnummer " + version;
+		}
 	}
 
 	/**

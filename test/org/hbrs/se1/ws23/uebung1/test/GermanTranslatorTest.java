@@ -13,4 +13,18 @@ class GermanTranslatorTest {
         String value = translator.translateNumber(0);
         assertEquals(value, "null");
     }
+
+    @Test
+    void aPositiveTest2() {
+        GermanTranslator translator = new GermanTranslator();
+        String value = translator.translateNumber(5);
+        assertEquals(value, "fünf");
+    }
+
+    @Test
+    void anegativeTest() {
+        GermanTranslator translator = new GermanTranslator();
+        String value = translator.translateNumber(-10);
+        assertEquals(value, "Übersetzung der Zahl -10 nicht möglich, Versionsnummer 1.0");
+    }
 }
