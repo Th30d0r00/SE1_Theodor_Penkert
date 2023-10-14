@@ -1,6 +1,7 @@
 package org.hbrs.se1.ws23.uebung1.test;
 
 import org.hbrs.se1.ws23.uebung1.control.GermanTranslator;
+import org.hbrs.se1.ws23.uebung1.view.Client;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
