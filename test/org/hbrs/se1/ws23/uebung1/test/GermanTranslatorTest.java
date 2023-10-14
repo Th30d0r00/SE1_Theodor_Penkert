@@ -11,13 +11,6 @@ class GermanTranslatorTest {
     @Test
     void aPositiveTest() {
         GermanTranslator translator = new GermanTranslator();
-        String value = translator.translateNumber(0);
-        assertEquals(value, "null");
-    }
-
-    @Test
-    void aPositiveTest2() {
-        GermanTranslator translator = new GermanTranslator();
         String value = translator.translateNumber(5);
         assertEquals(value, "fünf");
     }
@@ -25,7 +18,38 @@ class GermanTranslatorTest {
     @Test
     void anegativeTest() {
         GermanTranslator translator = new GermanTranslator();
+        String value = translator.translateNumber(0);
+        assertEquals(value, "Übersetzung der Zahl 0 nicht möglich, Versionsnummer 1.0");
+    }
+
+    @Test
+    void anegativeTest2() {
+        GermanTranslator translator = new GermanTranslator();
+        String value = translator.translateNumber(11);
+        assertEquals(value, "Übersetzung der Zahl 11 nicht möglich, Versionsnummer 1.0");
+    }
+
+    @Test
+    void anegativeTest3() {
+        GermanTranslator translator = new GermanTranslator();
         String value = translator.translateNumber(-10);
         assertEquals(value, "Übersetzung der Zahl -10 nicht möglich, Versionsnummer 1.0");
     }
+
+    @Test
+    void aPositiveTest2() {
+        GermanTranslator translator = new GermanTranslator();
+        String value = translator.translateNumber(1);
+        assertEquals(value, "eins");
+    }
+
+    @Test
+    void aPositiveTest3() {
+        GermanTranslator translator = new GermanTranslator();
+        String value = translator.translateNumber(10);
+        assertEquals(value, "zehn");
+    }
+
+
+
 }
