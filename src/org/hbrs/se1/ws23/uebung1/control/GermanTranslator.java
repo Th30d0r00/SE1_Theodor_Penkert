@@ -1,5 +1,8 @@
 package org.hbrs.se1.ws23.uebung1.control;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class GermanTranslator implements Translator {
 
 	public String date = "Okt/2023"; // Default-Wert
@@ -8,12 +11,25 @@ public class GermanTranslator implements Translator {
 	 * Methode zur Übersetzung einer Zahl in eine String-Repraesentation
 	 */
 	public String translateNumber(int number ) {
-		if (number <= 10 && number >= 1) {
-			String [] zahlen = {"null","eins", "zwei", "drei", "vier", "fünf","sechs","sieben","acht","neun","zehn"};
-			return zahlen[number];
-		} else {
-			return "Übersetzung der Zahl " + number + " nicht möglich, " + "Versionsnummer " + version;
+		String[] str_numbers = new String[] {
+				"eins",
+				"zwei",
+				"drei",
+				"vier",
+				"fuenf",
+				"sechs",
+				"sieben",
+				"acht",
+				"neun",
+				"zehn"
+		};
+		try {
+			return str_numbers[number - 1];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			return "Uebersetzung der Zahl " + number + " nicht möglich (" +
+					Translator.version + ")";
 		}
+
 	}
 
 	/**

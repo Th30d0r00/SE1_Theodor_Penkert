@@ -50,6 +50,13 @@ class GermanTranslatorTest {
         assertEquals(value, "zehn");
     }
 
+    @Test
+    void test() {
+        GermanTranslator translator = new GermanTranslator();
+        String value = translator.translateNumber(1);
+        assertEquals(value, "eins");
+    }
+
 
 
 }
