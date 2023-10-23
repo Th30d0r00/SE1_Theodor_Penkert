@@ -15,11 +15,6 @@ public class ContainerTest {
     ConcreteMember member1 = new ConcreteMember(1);
     ConcreteMember member2 = new ConcreteMember(2);
 
-    @BeforeEach
-    void setup() {
-        container = new Container();
-    }
-
     @Test
     void containerTest() throws ContainerException {
         container.addMember(member1);
