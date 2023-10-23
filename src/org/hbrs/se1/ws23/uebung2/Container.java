@@ -1,6 +1,7 @@
 package org.hbrs.se1.ws23.uebung2;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Container {
 
@@ -11,11 +12,11 @@ public class Container {
     }
 
     public void addMember(Member member) throws ContainerException {
-        for (Member i: members) {
-            if (member.getID() == i.getID()) {
-                throw new ContainerException(member);
+            for (Member i: members) {
+                if ((member.getID() == i.getID())) {
+                    throw new ContainerException(member);
+                }
             }
-        }
         members.add(member);
     }
 
