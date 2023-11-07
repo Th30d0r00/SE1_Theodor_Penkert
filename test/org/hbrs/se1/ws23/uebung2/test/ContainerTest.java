@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ContainerTest {
 
-    Container container = new Container();
+    Container container = Container.getInstance();
     ConcreteMember member1 = new ConcreteMember(1);
     ConcreteMember member2 = new ConcreteMember(2);
 
@@ -23,7 +23,7 @@ public class ContainerTest {
         assertEquals(2,container.size());
         assertThrows(ContainerException.class, () -> container.addMember(member1));
         assertThrows(ContainerException.class, () -> container.addMember(member2));
-        container.dump(); // Testet auf Ausgabe in der Konsole von den zwei Member Objekten
+        //container.dump(); // Testet auf Ausgabe in der Konsole von den zwei Member Objekten
         assertEquals("id nicht vorhanden", container.deleteMember(5));
         assertEquals("erfolgreich gelöscht", container.deleteMember(1));
         assertEquals(1,container.size());

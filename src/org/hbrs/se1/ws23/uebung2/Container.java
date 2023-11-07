@@ -1,14 +1,32 @@
 package org.hbrs.se1.ws23.uebung2;
 
+import org.hbrs.se1.ws23.uebung3.persistence.PersistenceException;
+import org.hbrs.se1.ws23.uebung3.persistence.PersistenceStrategy;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Container {
 
-    private ArrayList<Member> members;
+    private PersistenceStrategy persistenceStrategy;
+    private List<Member> members = new ArrayList<>();
+    private static Container container;
 
-    public Container () {
-        this.members = new ArrayList<>();
+    private Container () {
+
+    }
+
+    public void setPersistenceStrategy(PersistenceStrategy p) {
+        this.persistenceStrategy = p;
+    }
+
+    public static Container getInstance() {
+        if (container == null) {
+            container = new Container();
+        }
+        return container;
     }
 
     public void addMember(Member member) throws ContainerException {
@@ -34,13 +52,20 @@ public class Container {
     * wo ein Fehler liegt
     * */
 
-    public void dump() {
-        for (Member i: members) {
-            System.out.println(i.toString());
-        }
-    }
 
     public int size() {
         return members.size();
+    }
+
+    public void store() throws PersistenceException, IOException {
+        persistenceStrategy.save(members);
+    }
+
+    public void load() throws PersistenceException, IOException, ClassNotFoundException {
+        members = persistenceStrategy.load();
+    }
+
+    public List<Member> getCurrentList() {
+        return members;
     }
 }

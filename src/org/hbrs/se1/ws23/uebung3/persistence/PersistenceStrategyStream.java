@@ -1,15 +1,25 @@
 package org.hbrs.se1.ws23.uebung3.persistence;
 
+import org.hbrs.se1.ws23.uebung2.Member;
+
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class PersistenceStrategyStream<E> implements PersistenceStrategy<E> {
 
+    ObjectInputStream ois;
+    FileInputStream fis;
+    ObjectOutputStream ous;
+    FileOutputStream fos;
+    List newListe = new ArrayList<>();
+
     // URL of file, in which the objects are stored
-    private String location = "objects.ser";
+    private String location = "C:\\Users\\Theodor\\Desktop\\test.txt";
 
     // Backdoor method used only for testing purposes, if the location should be changed in a Unit-Test
     // Example: Location is a directory (Streams do not like directories, so try this out ;-)!
-    public void setLocation(String location) {
+    public void setLocation (String location) {
         this.location = location;
     }
 
@@ -19,7 +29,7 @@ public class PersistenceStrategyStream<E> implements PersistenceStrategy<E> {
      * In case of having problems while opening the streams, leave the code in methods load
      * and save.
      */
-    public void openConnection() throws PersistenceException {
+    public void openConnection() throws PersistenceException, IOException {
 
     }
 
@@ -27,7 +37,7 @@ public class PersistenceStrategyStream<E> implements PersistenceStrategy<E> {
     /**
      * Method for closing the connections to a stream
      */
-    public void closeConnection() throws PersistenceException {
+    public void closeConnection() throws PersistenceException, IOException {
 
     }
 
@@ -35,8 +45,11 @@ public class PersistenceStrategyStream<E> implements PersistenceStrategy<E> {
     /**
      * Method for saving a list of Member-objects to a disk (HDD)
      */
-    public void save(List<E> member) throws PersistenceException  {
-
+    public void save(List<E> l) throws PersistenceException, IOException {
+            fos = new FileOutputStream(location);
+            ous = new ObjectOutputStream(fos);
+            ous.writeObject(l);
+            ous.close();
     }
 
     @Override
@@ -45,7 +58,19 @@ public class PersistenceStrategyStream<E> implements PersistenceStrategy<E> {
      * Some coding examples come for free :-)
      * Take also a look at the import statements above ;-!
      */
-    public List<E> load() throws PersistenceException  {
+    public List<E> load() throws PersistenceException, IOException, ClassNotFoundException {
+        try {
+            fis = new FileInputStream(location);
+            ois = new ObjectInputStream(fis);
+            Object obj = ois.readObject();
+            if (obj instanceof List<?>) {
+                newListe = (List) obj;
+            }
+            ois.close();
+        }  catch (EOFException e) {
+            System.out.println("End of file reached");
+        }
+        return (List<E>) newListe;
         // Some Coding hints ;-)
 
         // ObjectInputStream ois = null;
@@ -66,6 +91,5 @@ public class PersistenceStrategyStream<E> implements PersistenceStrategy<E> {
         // return newListe
 
         // and finally close the streams (guess where this could be...?)
-        return null;
     }
 }
