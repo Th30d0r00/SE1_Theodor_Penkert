@@ -23,12 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 public class uebung3Test {
-    Container c = Container.getInstance();
 
-    @BeforeEach
-    void setup() {
-        c = Container.getInstance();
-    }
+    Container c = Container.getInstance();
 
 
     @Test
