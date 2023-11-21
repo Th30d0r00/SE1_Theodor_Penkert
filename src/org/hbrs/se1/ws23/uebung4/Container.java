@@ -1,17 +1,17 @@
-package org.hbrs.se1.ws23.uebung2;
+package org.hbrs.se1.ws23.uebung4;
 
+import org.hbrs.se1.ws23.uebung2.ContainerException;
+import org.hbrs.se1.ws23.uebung2.Member;
 import org.hbrs.se1.ws23.uebung3.persistence.PersistenceException;
 import org.hbrs.se1.ws23.uebung3.persistence.PersistenceStrategy;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Container {
-
     private PersistenceStrategy persistenceStrategy;
-    private List<Member> members = new ArrayList<>();
+    private List<UserStory> userStories = new ArrayList<>();
     private static Container container;
 
     private Container () {
@@ -30,43 +30,43 @@ public class Container {
         return container;
     }
 
-    public void addMember(Member member) throws ContainerException {
-            for (Member i: members) {
-                if ((member.getID() == i.getID())) {
-                    throw new ContainerException(member);
-                }
+    public void addUserStory(UserStory userStory) throws org.hbrs.se1.ws23.uebung4.ContainerException {
+        for (UserStory i: userStories) {
+            if ((userStory.getId() == i.getId())) {
+                throw new org.hbrs.se1.ws23.uebung4.ContainerException(userStory);
             }
-        members.add(member);
+        }
+        userStories.add(userStory);
     }
 
     public String deleteMember(int id) {
-        for (Member i: members) {
-            if (id == i.getID()) {
-                members.remove(i);
+        for (UserStory i: userStories) {
+            if (id == i.getId()) {
+                userStories.remove(i);
                 return "erfolgreich gelöscht";
             }
         }
         return "id nicht vorhanden";
     }
     /*d
-    * Ohne Rückgabe einer konkreten Exception kann unter Umständen nicht direkt nachvollzogen werden
-    * wo ein Fehler liegt
-    * */
+     * Ohne Rückgabe einer konkreten Exception kann unter Umständen nicht direkt nachvollzogen werden
+     * wo ein Fehler liegt
+     * */
 
 
     public int size() {
-        return members.size();
+        return userStories.size();
     }
 
     public void store() throws PersistenceException, IOException {
-        persistenceStrategy.save(members);
+        persistenceStrategy.save(userStories);
     }
 
     public void load() throws PersistenceException, IOException, ClassNotFoundException {
-        members = persistenceStrategy.load();
+        userStories = persistenceStrategy.load();
     }
 
-    public List<Member> getCurrentList() {
-        return members;
+    public List<UserStory> getCurrentList() {
+        return userStories;
     }
 }

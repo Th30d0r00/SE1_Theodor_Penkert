@@ -15,7 +15,8 @@ public class PersistenceStrategyStream<E> implements PersistenceStrategy<E> {
     List newListe = new ArrayList<>();
 
     // URL of file, in which the objects are stored
-    private String location = "C:\\Users\\Theodor\\Desktop\\test.txt";
+    private String location = "/Users/Theo/Desktop/test.txt";
+    // "C:\\Users\\Theodor\\Desktop\\test.txt"
 
     // Backdoor method used only for testing purposes, if the location should be changed in a Unit-Test
     // Example: Location is a directory (Streams do not like directories, so try this out ;-)!
@@ -45,11 +46,20 @@ public class PersistenceStrategyStream<E> implements PersistenceStrategy<E> {
     /**
      * Method for saving a list of Member-objects to a disk (HDD)
      */
-    public void save(List<E> l) throws PersistenceException, IOException {
+    public void save(List<E> l) throws PersistenceException {
+        try{
             fos = new FileOutputStream(location);
             ous = new ObjectOutputStream(fos);
             ous.writeObject(l);
             ous.close();
+        } catch (IOException e) {
+            // Koennte man ausgeben für interne Debugs: e.printStackTrace();
+            // Chain of Responsibility: Hochtragen der Exception in Richtung Ausgabe (UI)
+            // Uebergabe in ein lesbares Format fuer den Benutzer
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.ExceptionType.SaveFailure , "Fehler beim Speichern der Datei!");
+        }
+
     }
 
     @Override
@@ -69,6 +79,12 @@ public class PersistenceStrategyStream<E> implements PersistenceStrategy<E> {
             ois.close();
         }  catch (EOFException e) {
             System.out.println("End of file reached");
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new PersistenceException(PersistenceException.ExceptionType.LoadFailure , "Fehler beim Laden der Datei!");
+        }
+        catch (ClassNotFoundException e) {
+            throw new PersistenceException(PersistenceException.ExceptionType.LoadFailure , "Fehler beim Laden der Datei! Class not found!");
         }
         return (List<E>) newListe;
         // Some Coding hints ;-)

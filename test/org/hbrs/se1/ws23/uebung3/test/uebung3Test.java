@@ -27,6 +27,7 @@ public class uebung3Test {
     Container c = Container.getInstance();
 
 
+    //Test auf Verwendung der Strategie MongoDB
     @Test
     void testPersistenceStrategyMongoDB() throws PersistenceException, IOException, ClassNotFoundException {
         PersistenceStrategyMongoDB p = new PersistenceStrategyMongoDB();
@@ -34,6 +35,7 @@ public class uebung3Test {
         assertThrows(UnsupportedOperationException.class,() -> c.store());
     }
 
+    //Testet die Verwendung eines fehlerhaften Pfades
     @Test
     void testWrongLocation() throws PersistenceException, IOException {
         PersistenceStrategyStream p = new PersistenceStrategyStream();
@@ -43,12 +45,14 @@ public class uebung3Test {
         assertThrows(FileNotFoundException.class,() -> c.store());
     }
 
+    //Objekt hinzufügen, Liste persistent abspeichern, Objekt aus Container löschen und Liste wieder einladen
     @Test
     void roundTripTest() throws ContainerException, PersistenceException, IOException, ClassNotFoundException {
         ConcreteMember member = new ConcreteMember(1);
         c.addMember(member);
         assertEquals(1,c.size());
         PersistenceStrategyStream p = new PersistenceStrategyStream();
+        p.setLocation("/Users/Theo/Desktop/test.txt");
         c.setPersistenceStrategy(p);
         c.store();
         assertEquals(1,c.size());

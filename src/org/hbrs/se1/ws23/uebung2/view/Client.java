@@ -3,11 +3,13 @@ package org.hbrs.se1.ws23.uebung2.view;
 import org.hbrs.se1.ws23.uebung2.*;
 import org.hbrs.se1.ws23.uebung2.Container;
 import org.hbrs.se1.ws23.uebung3.persistence.PersistenceException;
+import org.hbrs.se1.ws23.uebung4.UserStory;
 
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Client {
     public static void main(String[] args) throws ContainerException, PersistenceException, IOException, ClassNotFoundException {
@@ -32,5 +34,7 @@ public class Client {
 
         //Ausgabe der Member Objekte durch Member View
         memberView.dump(test);
+
+
     }
 }
