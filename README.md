@@ -2,4 +2,4 @@
 
 Repository enthält die Abgaben des WS 23/24 im Modul SE1
 
-**Author: tpenke2s**
+**Author: tpenke2s/Theodor Penkert**
