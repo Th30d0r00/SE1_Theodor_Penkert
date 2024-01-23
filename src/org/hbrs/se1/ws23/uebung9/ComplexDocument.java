@@ -1,5 +1,4 @@
-package org.hbrs.se1.ws23.uebung8;
-import javax.print.Doc;
+package org.hbrs.se1.ws23.uebung9;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 

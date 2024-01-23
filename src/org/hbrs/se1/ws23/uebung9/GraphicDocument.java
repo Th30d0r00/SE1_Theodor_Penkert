@@ -1,4 +1,4 @@
-package org.hbrs.se1.ws23.uebung8;
+package org.hbrs.se1.ws23.uebung9;
 
 /*
  * Leaf Object

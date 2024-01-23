@@ -1,10 +1,8 @@
-package org.hbrs.se1.ws23.uebung8;
-import org.hbrs.se1.ws23.uebung8.Encoding;
+package org.hbrs.se1.ws23.uebung9;
 
 import java.io.UnsupportedEncodingException;
 
-import static org.hbrs.se1.ws23.uebung8.Encoding.UTF16;
-import static org.hbrs.se1.ws23.uebung8.Encoding.UTF8;
+import static org.hbrs.se1.ws23.uebung9.Encoding.UTF16;
 
 public class ClientTest {
 
@@ -18,6 +16,7 @@ public class ClientTest {
         aComplexDocument.add(document3);
         System.out.println(document2.size());
         System.out.println(document.size());
+        System.out.println(document3.size());
         System.out.println(aComplexDocument.size());
     }
 
